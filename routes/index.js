@@ -1,5 +1,20 @@
 var express = require('express');
+const bodyParser = require('body-parser');
+// const {Pool} = require('pg')
 var router = express.Router();
+const pool = require('../database/postgresql')
+
+// const pool = new Pool({
+//   user: 'postgresql',
+//   host:'localhost',
+//   database:'sistema_exames',
+//   password: '12345',
+//   port: 5432,
+// });
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Define o uso de arquivos estáticos
 router.use(express.static('public'));
@@ -8,7 +23,7 @@ router.use(express.static('public'));
 //router.set('view engine', 'ejs');
 
 // Rota para a página de login
-router.get('/login', function(req, res) {
+router.get('/', function(req, res) {
   res.render('login', { title: 'SUE - Login' });
 });
 
@@ -38,16 +53,18 @@ router.post('/login', (req, res) => {
 });
 
 // Rota para processar o cadastro (POST)
-router.post('/cadastro', (req, res) => {
-  const { nome, endereco, contato, tipoExame, dataEntrada, previsaoExame } = req.body;
+router.post('/cadastrar', async (req, res) => {
+  const { nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame } = req.body;
 
-  res.send(`
-    Nome: ${nome}, 
-    Endereço: ${endereco}, 
-    Contato: ${contato}, 
-    Tipo de Exame: ${tipoExame}, 
-    Data de Entrada: ${dataEntrada}, 
-    Previsão de Exame: ${previsaoExame}`);
+  try {
+    const result = await pool.query(
+       'INSERT INTO usuarios (nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame]
+    );
+    console.log(result.rows[0]);
+    res.send('Usuário cadastrado com sucesso!');
+  } catch (error) {
+    console.error('Erro ao inserir dados:', error);
+    res.send('Erro ao cadastrar usuário.'); }
 });
 
 module.exports = router;
