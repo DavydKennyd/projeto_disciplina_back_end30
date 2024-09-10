@@ -61,10 +61,11 @@ router.post('/cadastrar', async (req, res) => {
        'INSERT INTO usuarios (nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame]
     );
     console.log(result.rows[0]);
-    res.send('Usuário cadastrado com sucesso!');
+    res.json({ success: true, message: 'Usuário cadastrado com sucesso!' });
   } catch (error) {
-    console.error('Erro ao inserir dados:', error);
-    res.send('Erro ao cadastrar usuário.'); }
+      console.error('Erro ao inserir dados:', error);
+      res.json({ success: false, message: 'Erro ao cadastrar usuário.' });
+  }
 });
 
 module.exports = router;
