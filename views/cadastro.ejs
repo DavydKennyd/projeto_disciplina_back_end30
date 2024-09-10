@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -58,3 +59,65 @@
     <script src="../public/javascripts/cadastroRealizado.js"></script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/cadastro.css"> <!-- Link para o CSS externo -->
+</head>
+<body>
+    <h1>Cadastramento para Exames</h1>
+    <div class="cadastro-page">
+        <div class="form">
+          <h2>Formulário de Cadastramento</h2>
+          <form action="/cadastrar" method="post" class="cadastro-form">
+            
+            <!-- Nome completo -->
+            <div>
+              <input type="text" id="nome" name="nome_completo" placeholder="Nome Completo" required/>
+            </div>
+
+            <!-- Endereço -->
+            <div>
+              <input type="text" id="endereco" name="endereco" placeholder="Endereço" required/>
+            </div>
+
+            <!-- Contato (telefone ou email) -->
+            <div>
+              <input type="text" id="contato" name="contato" placeholder="Telefone ou Email" required/>
+            </div>
+
+            <!-- Tipo de Exame -->
+            <div>
+              <select id="tipoExame" name="tipo_exame" required>
+                <option value="">Selecione o tipo de exame</option>
+                <option value="sangue">Exame de Sangue</option>
+                <option value="urina">Exame de Urina</option>
+                <option value="imagem">Exame de Imagem</option>
+                <option value="outros">Outros</option>
+              </select>
+            </div>
+
+            <!-- Data de entrada do cadastramento -->
+            <div>
+              <input type="date" id="dataEntrada" name="data_entrada" required/>
+            </div>
+
+            <!-- Previsão para realização do exame -->
+            <div>
+              <input type="date" id="previsaoExame" name="previsao_exame" required/>
+            </div>
+
+            <!-- Botão de Enviar -->
+            <button type="submit">Cadastrar</button>
+          </form>
+        </div>
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+</body>
+</html>
+>>>>>>> 2f56639224fa05ab6f54c4cb0e098f8561a1e2b8
