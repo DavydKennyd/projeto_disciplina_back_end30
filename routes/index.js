@@ -62,6 +62,11 @@ router.post('/cadastrar', async (req, res) => {
     );
     console.log(result.rows[0]);
     res.send('Usuário cadastrado com sucesso!');
+
+    // Se der erro é provavel que o problema esteja aqui
+    alert('Usuário cadastrado com sucesso!');
+    res.alert('Usuário cadastrado com sucesso!')
+    
   } catch (error) {
     console.error('Erro ao inserir dados:', error);
     res.send('Erro ao cadastrar usuário.'); }

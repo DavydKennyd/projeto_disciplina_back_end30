@@ -3,14 +3,14 @@ const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
 
-    link: String,
-    nome: String,
-    descricao: String
+    CPF: String,
+    Nome: String,
+    Senha: String
 
 }, {
-    collection: 'Mercadoria'  // Adiciona o nome da coleção aqui
+    collection: 'Usuario'  // Adiciona o nome da coleção aqui
 });
 
-const Merc = mongoose.model('Mercadoria', UserSchema)
+const Use = mongoose.model('Usuario', UserSchema)
 
-module.exports = Merc;
+module.exports = Use;
