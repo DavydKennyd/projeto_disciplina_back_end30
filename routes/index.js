@@ -33,18 +33,18 @@ router.get('/cadastro', function(req, res) {
 });
 
 // Rota para a página do usuário com dados de exemplo
-router.get('/usuario', function(req, res) {
-  const usuario = {
-      nome: "João Silva",
-      endereco: "Rua dos Exames, 123",
-      contato: "(11) 98765-4321",
-      tipoExame: "Exame de Sangue",
-      dataEntrada: "2024-09-05",
-      previsaoExame: "2024-09-10"
-  };
+// router.get('/usuario', function(req, res) {
+//   const usuario = {
+//       nome: "João Silva",
+//       endereco: "Rua dos Exames, 123",
+//       contato: "(11) 98765-4321",
+//       tipoExame: "Exame de Sangue",
+//       dataEntrada: "2024-09-05",
+//       previsaoExame: "2024-09-10"
+//   };
 
-  res.render('usuario', { usuario });
-});
+//   res.render('usuario', { usuario });
+// });
 
 // Rota para processar o login (POST)
 router.post('/login', (req, res) => {
