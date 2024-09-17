@@ -19,40 +19,12 @@ router.get('/', async function(req, res, next) {
 
 });
 
-router.get('/usuario', async function(req, res) {  // isso aqui é so uma amostra de colocar na pagina pos pesquisa
-
-  var usuario = {};
-  var users;
-  try {
-
-     users = await Users.findOne()
-
-    usuario = {
-      nome: users.Nome
-    }
-
-  
-  } catch (error) {
-    res.status(500).json({error:error})
-  }
 
 
-  // const usuario = {
-  //     nome: "João Silva",
-  //     endereco: "Rua dos Exames, 123",
-  //     contato: "(11) 98765-4321",
-  //     tipoExame: "Exame de Sangue",
-  //     dataEntrada: "2024-09-05",
-  //     previsaoExame: "2024-09-10"
-  // };
-
-  res.render('usuario', { usuario });
-});
 
 router.post('/login', async function(req, res, next) {
   const {cpf,senha} = req.body
 
-  var usuario = {};;
   var users;
   try {
 
@@ -62,37 +34,46 @@ router.post('/login', async function(req, res, next) {
       return res.status(404).json({ error: 'Usuário não encontrado ou senha incorreta' });
     }
 
-    usuario = {
-      nome: users.Nome
+    tudo = {
+      Nome: users.Nome,
     }
-
+    // const resposta = await axios.get('http://localhost:3000/pesquisa', {Nome});
+    
     console.log(users)
+    res.render('usuario', { tudo });
 
   
   } catch (error) {
     res.status(500).json({error:error})
   }
-  res.render('usuario', { usuario });
+  
 });
 
 
 
 
 router.post('/cadastro', async function(req, res, next) {
-  const {Nome,CPF,Senha} = req.body
+  
+  const{
+    Nome,
+    CPF,
+    Senha} = req.body
 
-  var usuario = {
+  var usuarior = {
     Nome, CPF,Senha
   };
   try {
 
-    const users = await Users.create(usuario);
+    const users = await Users.create(usuarior);
 
     console.log(users)
+    res.status(200).json({ success: True, message: 'deu certo marquim' });
   
   } catch (error) {
+    res.status(500).json({ success: false, message: 'Erro ao comunicar com MongoDB' });
     res.status(500).json({error:error})
   }
+
 });
 
 module.exports = router;

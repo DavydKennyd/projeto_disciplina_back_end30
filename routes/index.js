@@ -33,29 +33,10 @@ router.get('/cadastro', function(req, res) {
   res.render('cadastro', { title: 'Cadastro de Exame' });
 });
 
-// Rota para a página do usuário com dados de exemplo
-// router.get('/usuario', function(req, res) {
-//   const usuario = {
-//       nome: "João Silva",
-//       endereco: "Rua dos Exames, 123",
-//       contato: "(11) 98765-4321",
-//       tipoExame: "Exame de Sangue",
-//       dataEntrada: "2024-09-05",
-//       previsaoExame: "2024-09-10"
-//   };
-
-//   res.render('usuario', { usuario });
-// });
-
-// Rota para processar o login (POST)
-router.post('/login', (req, res) => {
-  const { cpf, senha } = req.body;
-  res.send(`CPF: ${cpf}, Senha: ${senha}`);
-});
 
 // Rota para processar o cadastro (POST)
 router.post('/cadastrar', async (req, res) => {
-  const { nome_completo, 
+  const { Nome, 
     Cpf , 
     endereco, 
     contato, 
@@ -66,17 +47,54 @@ router.post('/cadastrar', async (req, res) => {
 
   try {
     const result = await pool.query(
-       'INSERT INTO usuarios (nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame]
+       'INSERT INTO usuarios (nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [Nome, endereco, contato, tipo_exame, data_entrada, previsao_exame]
     );
     console.log(result.rows[0]);
 
     const resposta = await axios.post('http://localhost:3001/api/cadastro', {
-      Nome: nome_completo,
+      Nome,
       CPF: Cpf,
       Senha: senha
   });
+ 
+  alert("cadastro efetuado com sucesso")
 
-    res.json({ success: true, message: 'Usuário cadastrado com sucesso!' });
+  } catch (error) {
+      console.error('Erro ao inserir dados:', error);
+      res.json({ success: false, message: 'Erro ao cadastrar usuário.' });
+  }
+});
+
+
+
+
+
+// Rota para processar o cadastro (POST)
+router.get('/pesquisa', async (req, res) => {
+  const {Nome} = req.body;
+
+  try {
+    const result = await pool.query(
+      "SELECT * FROM usuarios WHERE nome_completo = $1", [Nome]
+   );
+   console.log (Nome)
+    console.log(result.rows[0]);
+
+    const tudo = {
+      Nome: result.rows[0].nome_completo, 
+      endereco: result.rows[0].endereco, 
+      contato: result.rows[0].contato, 
+      tipoExame: result.rows[0].tipo_exame, 
+      confirma: result.rows[0].confirm || "Indefirido",
+      dataEntrada: result.rows[0].data_entrada, 
+      previsaoExame: result.rows[0].previsao_exame,
+    }
+
+    console.log(tudo)
+  
+    res.render('usuario', {tudo});
+  
+
   } catch (error) {
       console.error('Erro ao inserir dados:', error);
       res.json({ success: false, message: 'Erro ao cadastrar usuário.' });
