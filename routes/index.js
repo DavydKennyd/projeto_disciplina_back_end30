@@ -1,6 +1,7 @@
 var express = require('express');
 const bodyParser = require('body-parser');
 // const {Pool} = require('pg')
+const axios = require('axios');
 var router = express.Router();
 const pool = require('../database/postgresql')
 
@@ -54,13 +55,27 @@ router.post('/login', (req, res) => {
 
 // Rota para processar o cadastro (POST)
 router.post('/cadastrar', async (req, res) => {
-  const { nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame } = req.body;
+  const { nome_completo, 
+    Cpf , 
+    endereco, 
+    contato, 
+    tipo_exame, 
+    data_entrada, 
+    previsao_exame,
+    senha } = req.body;
 
   try {
     const result = await pool.query(
        'INSERT INTO usuarios (nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [nome_completo, endereco, contato, tipo_exame, data_entrada, previsao_exame]
     );
     console.log(result.rows[0]);
+
+    const resposta = await axios.post('http://localhost:3001/api/cadastro', {
+      Nome: nome_completo,
+      cpf: Cpf,
+      Senha: senha
+  });
+
     res.json({ success: true, message: 'Usuário cadastrado com sucesso!' });
   } catch (error) {
       console.error('Erro ao inserir dados:', error);
