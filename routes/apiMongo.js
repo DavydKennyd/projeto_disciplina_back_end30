@@ -79,10 +79,10 @@ router.post('/login', async function(req, res, next) {
 
 
 router.post('/cadastro', async function(req, res, next) {
-  const {Nome,cpf,Senha} = req.body
+  const {Nome,CPF,Senha} = req.body
 
   var usuario = {
-    Nome, cpf,Senha
+    Nome, CPF,Senha
   };
   try {
 

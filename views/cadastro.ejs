@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/cadastro.css"> <!-- Link para o CSS externo -->
-<!-- </head>
+</head>
 <body>
     <h1>Cadastramento para Exames</h1>
     <div class="cadastro-page">
@@ -15,21 +15,25 @@
           <form action="/cadastrar" method="post" class="cadastro-form" id="formcadastro">
             
             <!-- Nome completo -->
-            <!-- <div>
+            <div>
               <input type="text" id="nome" name="nome_completo" placeholder="Nome Completo" required/>
             </div>
 
+            <div>
+              <input type="text" id="Cpf" name="Cpf" placeholder="Seu CPF" required/>
+            </div>
+
             <!-- Endereço -->
-            <!-- <div>
+             <div>
               <input type="text" id="endereco" name="endereco" placeholder="Endereço" required/>
-            </div> -->
+            </div> 
 
             <!-- Contato (telefone ou email) -->
-            <!-- <div>
+             <div>
               <input type="text" id="contato" name="contato" placeholder="Telefone ou Email" required/>
-            </div> --> 
+            </div> 
 
-            <!-- Tipo de Exame
+             Tipo de Exame
             <div>
               <select id="tipoExame" name="tipo_exame" required>
                 <option value="">Selecione o tipo de exame</option>
@@ -38,16 +42,20 @@
                 <option value="imagem">Exame de Imagem</option>
                 <option value="outros">Outros</option>
               </select>
-            </div> -->
+            </div> 
 
             <!-- Data de entrada do cadastramento -->
-            <!-- <div>
+             <div>
               <input type="date" id="dataEntrada" name="data_entrada" required/>
-            </div> -->
+            </div> 
 
             <!-- Previsão para realização do exame -->
-            <!-- <div>
+             <div>
               <input type="date" id="previsaoExame" name="previsao_exame" required/>
+            </div>
+
+            <div>
+              <input type="password" id="senha" name="senha" placeholder="Senha" required/>
             </div>
 
           
@@ -89,4 +97,4 @@
 
     <script src="../public/javascripts/cadastroRealizado.js"></script>
 </body>
-</html>
+</html> 

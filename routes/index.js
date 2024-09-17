@@ -72,7 +72,7 @@ router.post('/cadastrar', async (req, res) => {
 
     const resposta = await axios.post('http://localhost:3001/api/cadastro', {
       Nome: nome_completo,
-      cpf: Cpf,
+      CPF: Cpf,
       Senha: senha
   });
 
