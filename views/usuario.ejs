@@ -16,22 +16,24 @@
             <h2>Informações Cadastradas</h2>
                 <div class="user-info">
                     <!-- Nome completo -->
-                    <p><strong>Nome Completo:</strong> <%= usuario.nome %></p>
+                    <p><strong>Nome Completo:</strong> <%= tudo.Nome %></p>
                     
                     <!-- Endereço -->
-                    <p><strong>Endereço:</strong> <%= usuario.endereco %></p>
+                    <p><strong>Endereço:</strong> <%= tudo.endereco %></p>
                     
                     <!-- Contato (telefone ou email) -->
-                    <p><strong>Contato:</strong> <%= usuario.contato %></p>
+                    <p><strong>Contato:</strong> <%= tudo.contato %></p>
                     
                     <!-- Tipo de Exame -->
-                    <p><strong>Tipo de Exame:</strong> <%= usuario.tipoExame %></p>
+                    <p><strong>Tipo de Exame:</strong> <%= tudo.tipoExame %></p>
+
+                    <p style="color: brown;"><strong>Confirmação do exame:</strong> <%= tudo.confirma %></p>
                     
                     <!-- Data de entrada do cadastramento -->
-                    <p><strong>Data de Entrada:</strong> <%= usuario.dataEntrada %></p>
+                    <p><strong>Data de Entrada:</strong> <%= tudo.dataEntrada %></p>
                     
                     <!-- Previsão para realização do exame -->
-                    <p><strong>Previsão de Realização do Exame:</strong> <%= usuario.previsaoExame %></p>
+                    <p><strong>Previsão de Realização do Exame:</strong> <%= tudo.previsaoExame %></p>
                 </div>
             <a href="/editar" class="edit-button">Editar Informações</a>
         </div>
