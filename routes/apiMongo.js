@@ -75,4 +75,24 @@ router.post('/login', async function(req, res, next) {
   res.render('usuario', { usuario });
 });
 
+
+
+
+router.post('/cadastro', async function(req, res, next) {
+  const {Nome,cpf,Senha} = req.body
+
+  var usuario = {
+    Nome, cpf,Senha
+  };
+  try {
+
+    const users = await Users.create(usuario);
+
+    console.log(users)
+  
+  } catch (error) {
+    res.status(500).json({error:error})
+  }
+});
+
 module.exports = router;
