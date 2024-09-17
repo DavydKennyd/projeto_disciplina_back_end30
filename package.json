@@ -6,6 +6,7 @@
     "start": "concurrently \"nodemon ./bin/www-m\" \"nodemon ./bin/www\""
   },
   "dependencies": {
+    "axil": "^0.0.0",
     "body-parser": "^1.20.2",
     "concurrently": "^9.0.0",
     "cookie-parser": "~1.4.4",
